@@ -3,6 +3,7 @@ var router = express.Router();
 var http = require('http');
 var Hashes = require('jshashes');//加密库
 
+var $user = require('../dao/userDao');
 
 /**路由级中间件，注意顺序*/
 /*router.use(function (req,res,next){
@@ -42,7 +43,104 @@ router.get('/', function(req, res, next) {
     number:fRandomBy(1,500),
     msg:'OK'
   };
-  res.send(JSON.stringify(obj));
+
+  $user.queryAll(req,function(err,rows){
+    if(rows&&rows.length>0){//rows是数组
+      res.send(JSON.stringify(rows));
+      return;
+    }
+    if(rows.length<=0){
+      res.send('no data');
+      return;
+    }
+    res.send(err);
+  });
+
+  //?username=xx&email=xx@qq.com
+  /*$user.insert(req,function(err,rows){
+    console.log(err);
+    console.log(rows);//插入操作，返回rows是对象
+    if(rows&&rows.insertId){
+      res.send(JSON.stringify(rows));
+      return;
+    }
+    
+    res.send(err);//插入失败，比如数据数据不唯一等等
+    // {
+    //   "code": "ER_DUP_ENTRY",
+    //   "errno": 1062,
+    //   "sqlState": "#23000"
+    // }
+
+  });*/
+
+
+
+  //index.html/?name=刘传宝&email=xxoo@xx.com&userId=1
+  /*$user.update(req,function(err,rows){
+    console.log(err);
+    console.log(rows);//更新操作，返回rows是对象
+    if(rows&&rows.serverStatus==2&&rows.affectedRows>0){
+      res.send(JSON.stringify(rows));
+      return;
+    }
+    if(rows.affectedRows<=0){
+      res.send('no this record;update fail!');
+      return;
+    }
+
+    res.send(err);
+  });*/
+
+  //index.html/?userId=1
+  /*$user.delete(req,function(err,rows){
+    console.log(err);
+    console.log(rows);//删除操作，返回rows是对象
+    if(rows&&rows.serverStatus==2&&rows.affectedRows>0){
+      res.send(JSON.stringify(rows));
+      return;
+    }
+    if(rows.affectedRows<=0){
+      res.send('no this record;delete fail!');
+      return;
+    }
+    
+    res.send(err);
+  });*/
+
+  //index.html/?userId=1
+  /*$user.queryById(req,function(err,rows){
+    //console.log(req.query.userId);
+    if(rows&&rows.length>0){//rows是数组
+      res.send(JSON.stringify(rows));
+      return;
+    }
+    if(rows.length<=0){
+      res.send('no data');
+      return;
+    }
+    console.log(err);
+    console.log(rows);
+    res.send(err);
+  });*/
+
+  //index.html/?username=ivan
+  /*$user.queryByUsername(req,function(err,rows){
+    //console.log(req.query.username);
+    if(rows&&rows.length>0){//rows是数组
+      res.send(JSON.stringify(rows));
+      return;
+    }
+    if(rows.length<=0){
+      res.send('no data');
+      return;
+    }
+    console.log(err);
+    console.log(rows);
+    res.send(err);
+  });*/
+
+  //res.send(JSON.stringify(obj));
 
 });
 
