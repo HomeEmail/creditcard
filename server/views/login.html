@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit"><!-- 国产双核浏览器，启用极速模式 -->
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="full-screen" content="yes">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="360-fullscreen" content="true">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="touch-fullscreen" content="yes"/>
+	
+    <title>登录佛山U生活</title>
+    <link rel="stylesheet" href="./res/css/base.css" />
+    <link rel="stylesheet" href="./res/css/idangerous.swiper.css" />
+    <link rel="stylesheet" href="./res/css/main.css" />
+    <link rel="stylesheet" href="./res/css/login.css" />
+    <style type="text/css">
+		html,body{
+			
+		}
+    </style>
+    <script type="text/javascript">
+    
+    </script>
+</head>
+<body style="" class="">
+	
+	<div class="login-wrapper">
+		<div class="login-input-item">
+			<div class="login-input-lable username-icon">用户名</div>
+			<div class="login-input-wrapper">
+				<input id="username" type="text" placeholder="输入用户名" />
+			</div>
+		</div>
+		<div class="login-input-item">
+			<div class="login-input-lable password-icon">密码</div>
+			<div class="login-input-wrapper">
+				<input id="password" type="password" />
+			</div>
+		</div>
+		<div class="forgetPassword"><a href="#">忘记密码></a></div>
+		<button class="login-submit">登录</button>
+	</div>
+	<div class="goRegBt-wrapper qrLoginBt-wrapper"><a class="qrLoginBt">广电号扫码登录</a></div>
+	<div class="goRegBt-wrapper"><a href="register.html">快速注册></a></div>
+
+	<script type="text/javascript" src="./res/js/lib/zepto-1.1.6.js"></script>
+	<script type="text/javascript" src="./res/js/lib/fx.js"></script>
+	<script type="text/javascript" src="./res/js/lib/fx_methods.js"></script>
+	<script type="text/javascript" src="./res/js/lib/idangerous.swiper.js"></script>
+	<script type="text/javascript" src="./res/js/lib/md5.js"></script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">
+		wx.config({
+			debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+			appId: 'wx367232f3094e72b1', // 必填，公众号的唯一标识
+			timestamp: '<%= timestamp %>', // 必填，生成签名的时间戳
+			nonceStr: '<%= noncestr %>', // 必填，生成签名的随机串
+			signature: '<%= signature %>',// 必填，签名，见附录1
+			jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'hideOptionMenu', 'showOptionMenu', 'closeWindow', 'hideMenuItems', 'showMenuItems', 'scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+		//当前网址：<%= url %>
+	</script>
+	<script type="text/javascript" src="./res/js/main.js"></script>
+
+	<script>
+		$('.login-submit').on('tap',function(e){
+			var $el=$(this);
+			var username,password;
+			username=$('#username').val();
+			password=''+$('#password').val();
+			if(!!!username||!!!password){
+				alert('请输入用户名和密码');
+				return;
+			}
+			if($el.html()=='登录中...'){
+				//登录中...
+				return;
+			}
+			$el.html('登录中...');
+			$.ajax({
+				type: 'GET',
+				url: serverAddress+'/utvgoClient/interfaces/utvgoUser_login.action',
+				// data to be added to query string:
+				data: {
+					catvid:username,
+					userPsw:hex_md5(password),
+					clientType:2,
+					version:'1.0',
+					extra:'extra',
+					loginFlag:'wx',
+					name:'wx',
+					userType:'Utvgo_User'
+				},
+				// type of data we are expecting in return:
+				dataType: 'json',
+				success: function(data){
+					$el.html('登录');
+					if(data.status==0){
+						//成功
+						userId=data.result.userId;
+						localStorage.setItem('account',JSON.stringify(data.result));
+						location.replace('./index.html');
+					}else{
+						alert(data.result.msg);
+					}
+				},
+				error: function(xhr, type){
+					$el.html('登录');
+				}
+			});
+		});
+
+		$('.qrLoginBt').on('tap',function(e){
+			wx.scanQRCode({
+			    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+			    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+			    success: function (res) {
+				    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+				    //alert(result);//8002003224494661_GZ_3_2016-10-11_18:06:13_BF99AFD06ED2699763D5810AC20B1B9A
+				    var arr=result.split('_');
+				    if(arr.length<=0||!!!arr[1]||!!!arr[2]||!/^[0-9]+$/.test(arr[0])){
+				    	alert('非法的二维码！');
+				    	return;
+				    }else{
+				    	localStorage.setItem('qrKeyNo',arr[0]);
+				    	localStorage.setItem('qrBranchNo',arr[1]);
+				    	location.replace('./qrLogin.html');
+				    }
+				}
+			});
+		});
+
+	</script>
+</body>
+
+
+</html>

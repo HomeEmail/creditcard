@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit"><!-- 国产双核浏览器，启用极速模式 -->
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="-1">
+
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="full-screen" content="yes">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="360-fullscreen" content="true">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="touch-fullscreen" content="yes"/>
+
+	<title><%= title %></title>
+	<link rel="stylesheet" href="./res/css/base.css" />
+	<link rel="stylesheet" href="./res/css/idangerous.swiper.css" />
+	<link rel="stylesheet" href="./res/css/main.css" />
+	<style type="text/css">
+
+	</style>
+	<script type="text/javascript">
+
+
+	</script>
+</head>
+<body style="" class="overflow-scroll-y">
+<div id="sideMenu" class="overflow-scroll-y">
+	<div class="search-wrapper">
+		<div type="text" id="searchInput">请输入关键词</div>
+	</div>
+	<div class="sideMenu-list-wrapper clearfix">
+		<a href="#" class="menuItem">
+			<img src="./res/images/home@2x.png">
+			<p>推荐</p>
+		</a>
+		<a href="zb_list.html" class="menuItem">
+			<img src="./res/images/liveplay_icon@2x.png">
+			<p>直播</p>
+		</a>
+		<!-- <a href="db_index.html" class="menuItem">
+            <img src="./res/images/db_icon@2x.png">
+            <p>点播</p>
+        </a> -->
+		<!-- <a href="http://app.utvgo.com:8099/utvgoClient/zhyl/build/index.html" class="menuItem">
+            <img src="./res/images/ZHMedical@2x.png">
+            <p>智慧医疗</p>
+        </a> -->
+		<a href="dy_list.html?channelId=10085" class="menuItem">
+			<img src="./res/images/movie_icon@2x.png">
+			<p>电影</p>
+		</a>
+		<a href="dy_list.html?channelId=10086" class="menuItem">
+			<img src="./res/images/dsj_icon@2x.png">
+			<p>剧集</p>
+		</a>
+		<a href="list.html?channelId=10087&channelName=动漫" class="menuItem">
+			<img src="./res/images/dm_icon@2x.png">
+			<p>动漫</p>
+		</a>
+		<a href="list.html?channelId=5&channelName=综艺" class="menuItem">
+			<img src="./res/images/variety@2x.png">
+			<p>综艺</p>
+		</a>
+		<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx367232f3094e72b1&redirect_uri=http%3a%2f%2fwww.96956.com.cn%2fmcrweb%2fpages%2fcommon%2fportal.shtml%3fpublishid%3dgh_c18d8c5de73b%26menucode%3dV_HEKA%26retdata%3d%7btid%3a%22yyy%22%7d&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect" class="menuItem">
+			<img src="./res/images/card_icon@2x.png">
+			<p>贺卡</p>
+		</a>
+		<a href="gb_list.html" class="menuItem">
+			<img src="./res/images/broadcast_icon@2x.png">
+			<p>广播</p>
+		</a>
+		<!-- <a href="#" class="menuItem">
+            <img src="./res/images/shopping_icon@2x.png">
+            <p>购物</p>
+        </a> -->
+		<!-- <a href="http://m.maizuo.com/" class="menuItem">
+            <img src="./res/images/ticket_icon@2x.png">
+            <p>电影票</p>
+        </a> -->
+		<!-- <a href="qd_list.html" class="menuItem">
+            <img src="./res/images/qd_icon@2x.png">
+            <p>强档</p>
+        </a>
+        <a href="sp_list.html" class="menuItem">
+            <img src="./res/images/zq_icon@2x.png">
+            <p>专区</p>
+        </a> -->
+		<a href="usercenter.html" class="menuItem">
+			<img src="./res/images/usercenter_icon@2x.png">
+			<p>个人中心</p>
+		</a>
+		<!-- <a href="#" class="menuItem">
+            <img src="./res/images/car_icon@2x.png">
+            <p>汽车</p>
+        </a>
+        <a href="#" class="menuItem">
+            <img src="./res/images/card_icon@2x.png">
+            <p>贺卡</p>
+        </a>
+        <a href="#" class="menuItem">
+            <img src="./res/images/39health_icon@2x.png">
+            <p>39健康</p>
+        </a> -->
+	</div>
+</div>
+<div id="main" class="overflowHidden">
+	<div class="main-header">
+		<button id="menuBt"></button>
+		<button id="meBt"></button>
+	</div>
+	<div class="main-scroll overflow-scroll-y" style="height:100%;">
+		<!--banner begin-->
+		<div id="indexTopBannerBox" class="swiper-container">
+			<ul id="scrollerIndexTopBanner" class="swiper-wrapper">
+				<% if(result.headPics.length){ %>
+					<% result.headPics.forEach(function(item){ %>
+						<li class="swiper-slide">
+							<a href="<%= item.href %>"><img src="<%= item.bigImg %>" /></a>
+						</li>
+					<% }) %>
+				<% } %>
+			</ul>
+			<div id="indexTopBannerTextBar" class="ellipsis"></div>
+			<div id="slideTopBannerIndicator" class="dib-wrapper">
+				<!-- <span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span> -->
+			</div>
+
+		</div>
+		<!--banner end-->
+
+
+		<!-- 直播 begin -->
+		<div class="rdzx-title">
+			<img src="./res/images/zbtj@3x.png" class="title-icon">
+			<span style="color:#4ED651;">直播</span>
+			<a href="zb_list.html" class="arrow-index"></a>
+		</div>
+		<div id="zbContent" class="indexContentBox">
+			 <% if(result.tvs.length){ %>
+				<% result.tvs.forEach(function(item){ %>
+					<div class="zb-item">
+						<a href="<%= './zb_listShow.html?playName='+encodeURIComponent(item.extra.tvName)+'&playUrl='+encodeURIComponent(item.extra.playUrl)+'&playImg='+encodeURIComponent('')+'&contentId='+encodeURIComponent(item.extra.id)+'&col=2&type='+encodeURIComponent(item.type) %>" class="zb-item-link clearfix">
+							<div class="zb-item-logo" style="background-image:url(<%= item.extra.img %>);"></div>
+							<div class="zb-item-text">
+								<p class="zb-item-name ellipsis"><%= item.name %></p>
+								<p class="zb-item-now ellipsis"><%= item.extra.showTime+' '+(!!item.extra.showName?item.extra.showName:'暂无节目名称') %></p>
+								<p class="zb-item-next ellipsis"><%= item.extra.nextShowTime+' '+(!!item.extra.nextShowName?item.extra.nextShowName:'暂无节目预告') %></p>
+							</div>
+							<div class="zb-item-icon"></div>
+							<% if(!item.extra.isOpen){ %><div class="zb-nolimitTime-icon"></div><% } %>
+						</a>
+					</div>
+				<%	}) %>
+
+			 <% } %>
+		</div>
+		<!-- 直播 end -->
+
+		<!-- 热门电影 start -->
+		<div class="rdzx-title">
+			<img src="./res/images/dytj@3x.png" class="title-icon">
+			<span style="color:#8278FB;">热门电影</span>
+			<a href="dy_list.html?channelId=10085" class="arrow-index"></a>
+		</div>
+		<div id="rmdyContent" class="clearfix indexContentBox">
+			<% if(result.ys.length){ %>
+				<% result.ys.forEach(function(item){ %>
+					<div class="rmdy-item">
+						<a href="<%= './dyDetail.html?channelId='+item.extra.channelId+'&contentId='+item.extra.id+'&type='+(item.extra.channelId==10086 ? 'dsj':'dy') %>" class="rmdy-item-link"><img src="<%= item.bigImg %>" />
+						<p class="rdzx-text ellipsis"><%= item.extra.name %></p></a>
+					</div>
+				<% }) %>
+			<% } %>
+		</div>
+		<!-- 热门电影 end -->
+		<!-- 热门剧集 start -->
+		<div class="rdzx-title">
+			<img src="./res/images/jjtj@3x.png" class="title-icon">
+			<span style="color:#16BD89;">热门剧集</span>
+			<a href="dy_list.html?channelId=10086" class="arrow-index"></a>
+		</div>
+		<div id="jjtjContent" class="clearfix indexContentBox">
+			<% if(result.zqs.length){ %>
+				<% result.zqs.forEach(function(item){ %>
+					<div class="rmdy-item">
+						<a href="<%= './dyDetail.html?channelId='+item.extra.channelId+'&contentId='+item.extra.id+'&type='+(item.extra.channelId==10086 ? 'dsj':'dy') %>" class="rmdy-item-link"><img src="<%= item.bigImg %>" />
+							<p class="rdzx-text ellipsis"><%= item.extra.name %></p></a>
+					</div>
+				<% }) %>
+			<% } %>
+		</div>
+		<!-- 热门剧集 end -->
+
+		<!-- 热门动漫 start -->
+		<div class="rdzx-title">
+			<img src="./res/images/rmdm@3x.png" class="title-icon">
+			<span style="">热门动漫</span>
+			<a href="list.html?channelId=10087" class="arrow-index"></a>
+		</div>
+		<div id="rmdmContent" class="clearfix indexContentBox">
+			<% if(result.dm.length){ %>
+				<% result.dm.forEach(function(item){ %>
+					<div class="rdzx-item">
+						<a href="<%= 'list_set.html?qdId='+item.extra.id+'&qdName='+item.extra.name %>" class="rdzx-item-link"><img src="<%= item.bigImg %>" />
+							<p class="rdzx-text ellipsis"><%= item.name %></p></a>
+					</div>
+				<% }) %>
+			<% } %>
+		</div>
+		<!-- 热门动漫 end -->
+
+
+		<!-- 热点资讯 begin -->
+		<div class="rdzx-title">
+			<img src="./res/images/rdzx@3x.png" class="title-icon">
+			<span>佛山资讯</span>
+			<a href="list.html?channelId=1&channelName=资讯" class="arrow-index"></a>
+		</div>
+		<div id="rdzxContent" class="clearfix indexContentBox">
+			<% if(result.hots.length){ %>
+				<% result.hots.forEach(function(item){ %>
+					<div class="rdzx-item">
+						<a href="<%= 'list_set.html?qdId='+item.extra.id+'&qdName='+item.extra.name %>" class="rdzx-item-link"><img src="<%= item.bigImg %>" />
+							<p class="rdzx-text ellipsis"><%= item.name %></p></a>
+					</div>
+				<% }) %>
+			<% } %>
+		</div>
+		<!-- 热点资讯 end -->
+
+		<!-- 应用专区 start -->
+		<!-- <div class="rdzx-title">
+            <img src="./res/images/yyzq@3x.png" class="title-icon">
+            <span style="color:#F5A612;">应用专区</span>
+            <a href="sp_list.html" class="arrow-index"></a>
+        </div>
+        <div id="yyzqContent" class="clearfix indexContentBox">
+            <div class="yyzq-item">
+                <a href="#" class="yyzq-item-link"><img src="./res/images/4.png" />
+                <p class="yyzq-text ellipsis">定键三闾</p></a>
+            </div>
+        </div> -->
+		<!-- 应用专区 end -->
+
+	</div>
+
+</div>
+
+<div class="loadingTip" style="display:none;"><div class="loadingTipImg"></div></div>
+
+
+<script type="text/javascript" src="./res/js/lib/zepto-1.1.6.js"></script>
+<script type="text/javascript" src="./res/js/lib/fx.js"></script>
+<script type="text/javascript" src="./res/js/lib/fx_methods.js"></script>
+<script type="text/javascript" src="./res/js/lib/idangerous.swiper.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript" src="./res/js/main.js"></script>
+<script type="text/javascript" src="./res/js/index_server.js"></script>
+<script type="text/javascript">
+
+
+
+</script>
+</body>
+
+
+</html>
