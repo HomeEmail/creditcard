@@ -21,6 +21,7 @@
 		"jshashes": "^1.0.5",
 		"morgan": "~1.6.1",
 		"mysql2": "^1.4.2",
+		"redis": "^2.8.0",
 		"serve-favicon": "~2.3.0",
 		"superagent": "^3.4.1",
 		"underscore": "^1.8.3"
