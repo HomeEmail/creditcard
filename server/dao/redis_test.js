@@ -19,6 +19,8 @@ client.on('error',function(err){
 
 client.on('connect',function(){
     console.log('connected redis');
+    client.select(3);//选择库
+
     //字符串
     client.set('author','ivan',$redis.print);
     client.get('author',$redis.print);
@@ -29,6 +31,8 @@ client.on('connect',function(){
         }
         console.log('custom callback handle:'+res);
     });
+
+    client.expire('author',20);//设置键author 20秒后过期
 
     //hash
     client.hmset('lesson:short',{'js':'javascript','C#':'C Sharp'},function(err,res){
