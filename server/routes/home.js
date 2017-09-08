@@ -45,6 +45,8 @@ router.get('/', function(req, res, next) {
   };
 
   $user.queryAll(req,function(err,rows){
+    console.log(err);
+    console.log(rows);
     if(rows&&rows.length>0){//rows是数组
       res.send(JSON.stringify(rows));
       return;

@@ -1,6 +1,11 @@
+var $conf=require('../conf/db');
+
 var $redis = require('redis');
 
-var client = $redis.createClient(6379,'127.0.0.1',{auth_pass:'123456'});
+var $bluebird = require('bluebird');//promise 库
+$bluebird.promisifyAll($redis);
+
+var client = $redis.createClient($conf.redis);
 //console.log(client);
 
 client.on('ready',function(err){
@@ -54,9 +59,9 @@ client.on('connect',function(){
 
     //集合
     var key = 'skills';
-    client.sadd(key,'C#');
-    client.sadd(key,'nodejs');
-    client.sadd(key,'MySQL');
+    client.sadd(key,'C#',$redis.print);
+    client.sadd(key,'nodejs',$redis.print);
+    client.sadd(key,'MySQL',$redis.print);
 
     //事务
     client.multi()
@@ -76,6 +81,27 @@ client.on('connect',function(){
         console.log(res);
     });
 
-    client.quit();
+    console.log('---uid----');
+    var uid=client.get('uid');
+    console.log(uid);
+    if(!!!uid){
+        console.log('uid is false');
+    }
+
+    //下边是promise方式 所有redis库方法加Async后缀
+    client.setAsync('var1','var11').then(function(res){
+        console.log('setAsync result:');
+        console.log(res);
+        
+        client.getAsync('var1').then(function(res){
+            console.log('getAsync result:');
+            console.log(res); 
+            client.quit();
+        });
+    }).catch(function(err){
+        console.log(err);
+    });
+
+   //client.quit();
 
 });
