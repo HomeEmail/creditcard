@@ -38,10 +38,13 @@ https://www.npmjs.com/package/gm
 First download and install GraphicsMagick or ImageMagick. In Mac OS X, you can simply use Homebrew and do:
 
 brew install imagemagick
+
 brew install graphicsmagick
+
 If you want WebP support with ImageMagick, you must add the WebP option:
 
 brew install imagemagick --with-webp
+
 then either use npm:
 
 yarn add gm
