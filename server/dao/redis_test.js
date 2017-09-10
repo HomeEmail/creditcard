@@ -17,9 +17,11 @@ client.on('error',function(err){
 });
 
 //redis 运行信息
+
 // client.info(function(err,response){
 //     console.log(err,response);
 // });
+
 
 
 client.on('connect',function(){
