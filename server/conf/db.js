@@ -3,7 +3,7 @@ module.exports = {
     mysql: {
         host: '127.0.0.1', 
         user: 'root',
-        password: '',
+        password: '123456',
         database:'creditcard', // 数据库
         port: 3306
     },
