@@ -128,7 +128,10 @@ module.exports={
 	        conn.execute(
 				$sql.queryAll,
 				[],
-				function(err,rows){
+				function(err,rows,feild){
+					console.log('----------feild-------');
+					console.log(feild);
+					
 					conn.release();
 					if(err){
 						console.log(err);

@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
       res.send(JSON.stringify(rows));
       return;
     }
-    if(rows.length<=0){
+    if(rows&&rows.length<=0){
       res.send('no data');
       return;
     }
