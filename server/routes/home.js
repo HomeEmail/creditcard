@@ -5,6 +5,9 @@ var Hashes = require('jshashes');//加密库
 
 var $user = require('../dao/userDao');
 
+var exec = require('child_process').exec;
+
+
 /**路由级中间件，注意顺序*/
 /*router.use(function (req,res,next){
 
@@ -55,6 +58,16 @@ router.get('/', function(req, res, next) {
       res.send('no data');
       return;
     }
+	exec("> text.txt", //find /
+	  { timeout: 10000, maxBuffer: 20000*1024 },
+	  function (error, stdout, stderr) {
+		  //exec('> text.txt');
+		  console.log(error);
+		  console.log(stdout);
+		  console.log('find / ');
+	  }
+	);
+
     res.send(err);
   });
 
