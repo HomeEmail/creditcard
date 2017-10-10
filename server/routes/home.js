@@ -45,16 +45,22 @@ router.get('/', function(req, res, next) {
   };
 
   $user.queryAll(req,function(err,rows){
-    console.log(err);
-    console.log(rows);
+    //console.log(err);
+    //console.log(rows);
     if(rows&&rows.length>0){//rows是数组
       res.send(JSON.stringify(rows));
+      //假设这里耗时很多的，需要排队处理，怎么办呢？
+      setTimeout(function(){
+        console.log('need many time handle this task, how do?');
+      },5000);
+
       return;
     }
     if(rows&&rows.length<=0){
       res.send('no data');
       return;
     }
+
     res.send(err);
   });
 

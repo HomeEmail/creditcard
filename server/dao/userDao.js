@@ -130,7 +130,7 @@ module.exports={
 				[],
 				function(err,rows,feild){
 					console.log('----------feild-------');
-					console.log(feild);
+					//console.log(feild);
 					
 					conn.release();
 					if(err){
