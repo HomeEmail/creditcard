@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 var Hashes = require('jshashes');//加密库
-
+var path = require('path');
 var $user = require('../dao/userDao');
+
+var execFile = require('child_process').execFile;
 
 /**路由级中间件，注意顺序*/
 /*router.use(function (req,res,next){
@@ -53,13 +55,25 @@ router.get('/', function(req, res, next) {
       /*setTimeout(function(){
         console.log('need many time handle this task, how do?');
       },5000);*/
-      
-      console.log('need many time handle this task, how do?');
-      var n=0;
-      for(var i=0;i<1000000000;i++){
-        n=n+i;
-      }
-      console.log('total:'+n);
+
+        console.log('need many time handle this task, how do?');
+
+	    console.log(__dirname);
+
+	    console.log('path.resolve:'+path.resolve('./'));// 当前项目根路径绝对路径
+
+		var param = path.resolve('./')+'/server/lib/child_tast_handle.js';
+
+		//node ../lib/child_tast_handle.js
+	    execFile('node',[param],{
+		    //cwd:__dirname
+	    },function(err,stdout,stderr){
+		   if(err){
+			   console.log(err);
+			   return;
+		   }
+		    console.log(':'+stdout);
+	    });
 
       return;
     }
@@ -69,6 +83,7 @@ router.get('/', function(req, res, next) {
     }
 
     res.send(err);
+
   });
 
   //?username=xx&email=xx@qq.com
