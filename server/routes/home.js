@@ -50,9 +50,16 @@ router.get('/', function(req, res, next) {
     if(rows&&rows.length>0){//rows是数组
       res.send(JSON.stringify(rows));
       //假设这里耗时很多的，需要排队处理，怎么办呢？
-      setTimeout(function(){
+      /*setTimeout(function(){
         console.log('need many time handle this task, how do?');
-      },5000);
+      },5000);*/
+      
+      console.log('need many time handle this task, how do?');
+      var n=0;
+      for(var i=0;i<1000000000;i++){
+        n=n+i;
+      }
+      console.log('total:'+n);
 
       return;
     }
