@@ -5,7 +5,8 @@ module.exports = {
         user: 'root',
         password: '123456',
         database:'creditcard', // 数据库
-        port: 3306
+        port: 3306,
+        connectionLimit: 200 //最大连接数
     },
     redis:{
         host: '127.0.0.1',

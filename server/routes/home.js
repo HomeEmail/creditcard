@@ -4,6 +4,8 @@ var http = require('http');
 var Hashes = require('jshashes');//加密库
 var path = require('path');
 var $user = require('../dao/userDao');
+var log4js = require('../conf/log');//配置好的日记对象
+var logger=log4js.getLogger(__filename);//把当前代码文件路径也输出到日记中
 
 var execFile = require('child_process').execFile;
 
@@ -46,7 +48,9 @@ router.get('/', function(req, res, next) {
     msg:'OK'
   };
 
-  $user.queryAll(req,function(err,rows){
+  logger.info('index:','query mysql begin');
+
+  $user.queryAll(req,function(err,rows,feild){
     //console.log(err);
     //console.log(rows);
     if(rows&&rows.length>0){//rows是数组
@@ -56,16 +60,16 @@ router.get('/', function(req, res, next) {
         console.log('need many time handle this task, how do?');
       },5000);*/
 
-        console.log('need many time handle this task, how do?');
+      console.log('-----need many time handle this task-----');
 
 	    console.log(__dirname);
 
 	    console.log('path.resolve:'+path.resolve('./'));// 当前项目根路径绝对路径
 
-		var param = path.resolve('./')+'/server/lib/child_tast_handle.js';
+		  var param = path.resolve('./')+'/server/lib/child_tast_handle.js';
 
-		//node ../lib/child_tast_handle.js
-	    execFile('node',[param],{
+		  //node ../lib/child_tast_handle.js
+	    execFile('node',[param,'param1','param2'],{
 		    //cwd:__dirname
 	    },function(err,stdout,stderr){
 		   if(err){
@@ -81,6 +85,8 @@ router.get('/', function(req, res, next) {
       res.send('no data');
       return;
     }
+    
+    logger.error('index:','query mysql error');
 
     res.send(err);
 
@@ -90,7 +96,7 @@ router.get('/', function(req, res, next) {
   /*$user.insert(req,function(err,rows){
     console.log(err);
     console.log(rows);//插入操作，返回rows是对象
-    if(rows&&rows.insertId){
+    if(rows&&rows.insertId){ //insertId 就是刚刚新增的id
       res.send(JSON.stringify(rows));
       return;
     }

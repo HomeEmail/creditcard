@@ -2,3 +2,5 @@ node_modules
 temp
 *.zip
 *.lock
+log/
+*.log
