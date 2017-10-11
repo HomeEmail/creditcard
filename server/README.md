@@ -12,6 +12,7 @@ pm2 start server/bin/www --watch
 ```
 
 
+
 ##启动redis服务
 
 在安装根目录下执行命令
@@ -20,7 +21,8 @@ window:
 cmd运行 redis-server.exe redis.windows.conf 
 
 mac:
-
+使用配置文件启动redis server 
+$ redis-server /usr/local/etc/redis.conf
 
 ##启动redis客户端
 

@@ -9,6 +9,8 @@ var logger=log4js.getLogger(__filename);//把当前代码文件路径也输出�
 
 var execFile = require('child_process').execFile;
 
+var cache = require('../dao/cache');//返回配置好的缓存对象
+
 /**路由级中间件，注意顺序*/
 /*router.use(function (req,res,next){
 
@@ -55,16 +57,29 @@ router.get('/', function(req, res, next) {
     //console.log(rows);
     if(rows&&rows.length>0){//rows是数组
       res.send(JSON.stringify(rows));
-      //假设这里耗时很多的，需要排队处理，怎么办呢？
-      /*setTimeout(function(){
-        console.log('need many time handle this task, how do?');
-      },5000);*/
+
+	    //set cache
+	    cache.set('author','ivan',function(err,res){
+		    console.log('print:'+res);
+	    });
+	    cache.get('author',function(err,res){
+		    if(err){
+			    console.log('Error:'+err);
+			    return;
+		    }
+		    console.log('custom callback handle:'+res);
+	    });
+
+	    cache.expire('author',20);//设置键author 20秒后过期
+
 
       console.log('-----need many time handle this task-----');
 
 	    console.log(__dirname);
 
 	    console.log('path.resolve:'+path.resolve('./'));// 当前项目根路径绝对路径
+
+	    //假设这里耗时很多的,开另外一个异步进程来处理，不影响后来的请求
 
 		  var param = path.resolve('./')+'/server/lib/child_tast_handle.js';
 

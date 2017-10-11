@@ -10,7 +10,7 @@ var arguments = process.argv.splice(2);//splice返回新数组，会更改原数
 console.log(arguments);
 
 var n=0;
-for(var i=0;i<2000000000;i++){
+for(var i=0;i<1000000000;i++){
 	n=n+i;
 }
 var t2=new Date().getTime();

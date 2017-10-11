@@ -104,6 +104,5 @@ client.on('connect',function(){
         console.log(err);
     });
 
-   //client.quit();
 
 });
