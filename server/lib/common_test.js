@@ -56,6 +56,12 @@ console.log('hashids_decode:'+common.hashids_decode(encodeStr1)+'||end');
 console.log(common.hashids_decode(encodeStr1));
 
 
+var encryptStr=common.encrypt('sdf2233d$dsf||33||username');
+console.log('encryptStr:'+encryptStr);
+var decryptStr=common.decrypt(encryptStr);
+console.log('decryptStr:'+decryptStr);
+
+
 
 
 

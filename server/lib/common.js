@@ -5,10 +5,24 @@ var uuidv4 = require('uuid/v4');//base random
 var uuidv5 = require('uuid/v5');//base namespace
 var fs = require('fs');
 var Hashids = require('hashids');//加密解密 (短字符串)
-
+var crypto = require('crypto');//nodejs 自带的加解密库
 
 
 module.exports = {
+    encrypt:function(s){//加密
+        var key='xssd&s@$aa.ddWd';//你的密钥
+        var cipher = crypto.createCipher('aes-256-cbc',key);
+        var crypted = cipher.update(s,'utf8','hex');
+        crypted += cipher.final('hex');
+        return crypted;
+    },
+    decrypt:function(s){//解密
+        var key='xssd&s@$aa.ddWd';//你的密钥
+        var decipher = crypto.createDecipher('aes-256-cbc',key)
+        var dec = decipher.update(s,'hex','utf8');
+        dec += decipher.final('utf8');
+        return dec;
+    },
     sha1:function(s){
         return new Hashes.SHA1().hex(s);
     },
