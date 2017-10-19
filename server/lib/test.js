@@ -5,8 +5,7 @@
 
 console.log('__dirname:'+__dirname);
 
-
-(() => {console.log('=>>>>>');})();
+//(() => {console.log('=>>>>>');})();
 
 
 //node v7 
