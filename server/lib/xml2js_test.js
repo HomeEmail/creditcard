@@ -16,7 +16,7 @@ console.log(xml);
 2.xml仅仅有值，那么数组第一项就是字符串，否则就是对象，对象里的_ 的值才是xml的值，对象里的$对象存放xml的属性
 3.多个一样的xml标签的值都会存放在josn数组里
 */
- */
+
 var parser = new xml2js.Parser();
 var data = '<root><name date="08/08/2008" time="11:22:02">Super</name><Surname>Man</Surname><age>23</age><extra><a1>1</a1><a2>a2</a2></extra><ary>a</ary><ary>11</ary></root>';
 parser.parseString(data, function (err, result) {
