@@ -12,6 +12,8 @@ pm2 start server/bin/www --watch
 ```
 
 
+nodejs 解决中文乱码问题 ：使用iconv-lite 库
+
 
 ##启动redis服务
 
