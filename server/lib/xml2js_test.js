@@ -1,7 +1,7 @@
 var xml2js = require('xml2js');
 var util = require('util');
 
-var obj = {name: "Super", Surname: "Man", age: 23,extra:{a1:1,a2:2,a3:'a3'},ary:['a','b','c',11,{ary1:{h1:2,h2:'h'},ary2:'ad'}]};
+var obj = {name: [{_:"Super",$:{date:'08/08/2008'}},{_:'xxoo',$:{fuck:'xx'}}], Surname: "Man", age: 23,extra:{a1:1,a2:2,a3:'a3'},ary:['a','b','c',11,{ary1:{h1:2,h2:'h'},ary2:'ad'}]};
 //json to xml
 var builder = new xml2js.Builder();
 var xml = builder.buildObject(obj);
@@ -18,7 +18,7 @@ console.log(xml);
 */
 
 var parser = new xml2js.Parser();
-var data = '<root><name date="08/08/2008" time="11:22:02">Super</name><Surname>Man</Surname><age>23</age><extra><a1>1</a1><a2>a2</a2></extra><ary>a</ary><ary>11</ary></root>';
+var data = '<root><name date="08/08/2008" time="11:22:02">Super</name><Surname>Man</Surname><age>23</age><extra><a1>1</a1><a2>a2</a2></extra><ary>a</ary><ary>11</ary><property name="fuck" /></root>';
 parser.parseString(data, function (err, result) {
 	console.log('---xml => json---');
 	console.log(util.inspect(result.root, false, null));//要使用util.inspect来显示全部节点
