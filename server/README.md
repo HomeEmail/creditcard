@@ -14,6 +14,8 @@ pm2 start server/bin/www --watch
 
 nodejs 解决中文乱码问题 ：使用iconv-lite 库
 
+跑定时任务  node-schedule 
+
 
 ##启动redis服务
 
