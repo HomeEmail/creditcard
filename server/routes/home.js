@@ -9,7 +9,7 @@ var logger=log4js.getLogger(__filename);//把当前代码文件路径也输出�
 
 var execFile = require('child_process').execFile;
 
-var cache = require('../dao/cache');//返回配置好的缓存对象
+//var cache = require('../dao/cache');//返回配置好的缓存对象
 
 /**路由级中间件，注意顺序*/
 /*router.use(function (req,res,next){
@@ -58,7 +58,7 @@ router.get('/', function(req, res, next) {
     if(rows&&rows.length>0){//rows是数组
       res.send(JSON.stringify(rows));
 
-	    //set cache
+	    /*//set cache
 	    cache.set('author','ivan',function(err,res){
 		    console.log('print:'+res);
 	    });
@@ -71,7 +71,7 @@ router.get('/', function(req, res, next) {
 	    });
 
 	    cache.expire('author',20);//设置键author 20秒后过期
-
+*/
 
       console.log('-----need many time handle this task-----');
 
