@@ -4,3 +4,4 @@ temp
 *.lock
 log/
 *.log
+.idea
