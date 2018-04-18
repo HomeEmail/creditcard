@@ -5,7 +5,7 @@
 
 console.log('__dirname:'+__dirname);
 
-console.log('test');
+console.log('__filename:'+__filename);
 
 //(() => {console.log('=>>>>>');})();
 
