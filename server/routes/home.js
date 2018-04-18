@@ -77,7 +77,7 @@ router.get('/', function(req, res, next) {
 
 	    console.log(__dirname);
 
-	    console.log('path.resolve:'+path.resolve('./'));// 当前项目根路径绝对路径
+	    console.log('path.resolve:'+path.resolve('./'));// 当前执行node命令时所处的目录路径
 
 	    //假设这里耗时很多的,开另外一个异步进程来处理，不影响后来的请求
 

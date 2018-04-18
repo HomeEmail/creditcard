@@ -36,7 +36,7 @@ console.log('base64 encode:'+common.b64_encode('JavaScript'));
 console.log('base64 decode:'+common.b64_decode('SmF2YVNjcmlwdA=='));
 
 console.log('__dirname:'+__dirname);
-console.log('path.resolve:'+path.resolve('./'));// 当前项目根路径绝对路径
+console.log('path.resolve:'+path.resolve('./'));// 当前执行node命令时所处的目录路径
 
 var projectPath=path.resolve('./');//不带/的
 
