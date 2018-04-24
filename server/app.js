@@ -1,19 +1,22 @@
 var express = require('express');
 var path = require('path');
 /*var favicon = require('serve-favicon');
-var logger = require('morgan');
+var logger = require('morgan');*/
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-
-var bodyParser = require('body-parser');*/
+var bodyParser = require('body-parser');
 
 var indexHome = require('./routes/home');
+
+var captcha = require('./routes/captcha');
 
 // var indexHome = require('./routes/index');
 // var login = require('./routes/login');
 // var getWXsignature = require('./routes/ajaxGetSignature');
 
 /*var users = require('./routes/users');*/
+
+var config = require('./conf/config');//配置项
 
 var app = express();
 
@@ -25,10 +28,10 @@ app.set('view engine','html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-/*app.use(logger('dev'));
+/*app.use(logger('dev'));*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());*/
+app.use(cookieParser());
 
 //__dirname 当前代码执行的目录
 //path.resolve(__dirname, '..') 当前目录的上级目录
@@ -38,39 +41,49 @@ app.use(express.static(path.join(path.resolve(__dirname, '..'), 'dest')));
 
 
 //session 配置
-/*
+console.log('config.js:',config);
 app.use(session({
-  secret: 'xxoo',
-  name: 'ivan',   //这里的name值得是cookie的name，将会作为cookie随请求发给客户端，默认cookie的name是：connect.sid
-  cookie: {maxAge: 80000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+  secret: config.session.secret, //生成session sid和cookie的密钥
+  name: 'sid',   //这里的name指的是cookie的name，将会作为cookie随请求发给客户端，默认cookie的name是：connect.sid
+  cookie: {maxAge: config.session.maxAge },  //设置maxAge是ms，即maxAge后session和相应的cookie失效过期
   resave: false,
   saveUninitialized: true
 }));
-*/
+//会生成 req.sessionID
 
 
 // 没有挂载路径的中间件，应用的每个请求都会执行该中间件,注意应用级中间件的顺序
-/*app.use(function (req, res, next) {
+app.use(function (req, res, next) {
   console.log('应用级Time:', Date.now());
   if(req.session){
-    console.log('session 存在');
+    console.log('session 存在 值为:',req.session);
+    if(!!req.session.captcha){
+      console.log('captcha:'+req.session.captcha);//验证码
+    }
   }else{
     console.log('session 不存在');
   }
-  if(req.session.sessionName){
-    console.log('sessionName page was: '+req.session.sessionName);
+  if(req.cookies){
+    console.log('cookies 存在 值为:',req.cookies);//
   }
+  if(req.sessionID){
+    console.log('req.sessionID:'+req.sessionID);
+  }
+  // if(req.session.sessionName){
+  //   console.log('sessionName page was: '+req.session.sessionName);
+  // }
   //设置session
-  req.session.sessionName='sessionName';
+  //req.session.sessionName='sessionName';
   //销毁session
   // req.session.destroy(function(err) {
   //   // cannot access session here
   // });
 
   next();
-});*/
+});
 
 app.use('/',indexHome);
+app.use('/captcha',captcha);
 
 //app.use('/utvgo_wx/dest/index.html', indexHome);
 //app.use('/utvgo_wx/dest/login.html',login);
