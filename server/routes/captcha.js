@@ -33,3 +33,8 @@ router.get('/math',function(req,res,next){
 });
 
 module.exports = router;
+
+/**
+how to use:
+<img id="captcha" onclick="reloadCaptcha(this);" src="http://localhost:8082/captcha?t=222" />
+**/

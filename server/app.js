@@ -103,7 +103,8 @@ app.use('/captcha',captcha);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.status(404).send();
+  //next(err);
 });
 
 // error handlers
