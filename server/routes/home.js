@@ -7,6 +7,8 @@ var $user = require('../dao/userDao');
 var log4js = require('../conf/log');//配置好的日记对象
 var logger=log4js.getLogger(__filename);//把当前代码文件路径也输出到日记中
 
+var common=require('../lib/common');
+
 var execFile = require('child_process').execFile;
 
 //var cache = require('../dao/cache');//返回配置好的缓存对象
@@ -202,7 +204,42 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/logout',function(req,res,next){
-	res.send('logout ooh! are u sure?');
+  var token=req.get('token');
+  var data={};
+  if(!token){
+    data={
+      code:0,
+      msg:'param error'
+    };
+  }
+  if(!!req.session[token]){
+    req.session[token]=null;
+    //销毁session
+    req.session.destroy(function(err) {
+      // cannot access session here
+    });
+    //req.session={};
+    data={
+      code:1,
+      msg:'logout success',
+      isLogout:true
+    };
+  }
+  
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
+});
+
+router.get('/test1',function(req,res,next){
+  res.setHeader('Content-Type', 'application/json');
+  res.send({oo:1,dd:'ss',token:req.get('token')});
+});
+
+router.get('/test1/child',function(req,res,next){
+  //console.log('req.headers:',req.headers);
+  console.log('req.get(\'token\')',req.get('token'));
+  res.setHeader('Content-Type', 'application/json');
+  res.send({test:'child',oo:1,dd:'ss',aa:null,bb:undefined,token:req.get('token')});
 });
 
 
@@ -217,18 +254,59 @@ router.get('/login',function(req,res){
   res.render('login',{title:'login'});
   console.log('login');
 });
+*/
+
 router.post('/login',function(req,res){
-  res.setHeader('token', 'xxoo1100');
-  var info=req.body.username+'<br/>'+req.body.pwd;
-  res.send(info+'<br/>login success');
-  console.log(req.body);
-  //console.log(res);
+  var username=req.body.username;
+  var pwd=req.body.pwd;
+
+  var data={
+    code:0,
+    msg:'login failure'
+  };
+  if(!username||!pwd){
+    data.msg='账号或密码为空';
+  }
+
+  if(username=='ivan'&&pwd=='123456'){
+    var value=username+'||'+Date.now();
+    var token=common.encrypt(value);
+    req.session[token]=value;
+    res.setHeader('token', token);
+    data={
+      code:1,
+      msg:'login success',
+      token:token
+    };
+  }else{
+    data={
+      code:0,
+      msg:'login failure:username or pwd error'
+    }
+  }
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
 });
 router.get('/login/check',function(req,res){
-  res.send('login check');
-  console.log('/login/check');
+  var token=req.get('token');
+  console.log('/login/check','req.get',token);
+  var data={
+  };
+  if(!token){
+    data={
+      code:0,
+      msg:'param error'
+    };
+  }else{
+    data={
+      code:1,
+      msg:'',
+      isLogin:!!req.session[token]&&common.decrypt(token)===req.session[token]
+    };
+  }
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
 });
-*/
 
 
 

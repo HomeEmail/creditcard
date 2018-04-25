@@ -2,6 +2,16 @@
 // import {someConfig} from 'test1';
 
 // console.log(someConfig);
+var fs = require('fs');
+var path = require('path');
+
+//判断文件是否存在
+if(fs.access(path.join(__dirname,'test.log'),fs.F_OK,function(err){
+	console.log(err?'test.log文件不存在':'test.log文件存在');
+}));
+if(fs.access(path.join(__dirname,'common.js'),fs.F_OK,function(err){
+	console.log(err?'common.js文件不存在':'common.js文件存在');
+}));
 
 console.log('__dirname:'+__dirname);
 

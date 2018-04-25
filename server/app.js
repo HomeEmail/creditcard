@@ -15,7 +15,7 @@ var captcha = require('./routes/captcha');
 // var getWXsignature = require('./routes/ajaxGetSignature');
 
 /*var users = require('./routes/users');*/
-
+var common = require('./lib/common');
 var config = require('./conf/config');//配置项
 
 var app = express();
@@ -55,6 +55,29 @@ app.use(session({
 // 没有挂载路径的中间件，应用的每个请求都会执行该中间件,注意应用级中间件的顺序
 app.use(function (req, res, next) {
   console.log('应用级Time:', Date.now());
+  var url=req.url;
+  var token=req.get('token');
+  //检查是否需要登陆验证
+  var urlPath=url.split('?')[0];
+  var isNeedLogin=true;
+  for(var i=0,len=config.notNeedLoginUrls.length;i<len;i++){
+    if(urlPath===config.notNeedLoginUrls[i]||urlPath===config.notNeedLoginUrls[i]+'/'){
+      isNeedLogin=false;
+      break;
+    }
+  }
+  console.log('isNeedLogin:'+isNeedLogin);
+  //检查是否登陆了
+  if(isNeedLogin){
+    if(!!req.session[token]&&common.decrypt(token)===req.session[token]){
+      //登陆验证通过
+    }else{
+      //登陆验证不通过
+      res.status(401).send();
+      return 0;
+    }
+  }
+
   if(req.session){
     console.log('session 存在 值为:',req.session);
     if(!!req.session.captcha){
@@ -69,6 +92,7 @@ app.use(function (req, res, next) {
   if(req.sessionID){
     console.log('req.sessionID:'+req.sessionID);
   }
+  console.log('req url:',req.url);
   // if(req.session.sessionName){
   //   console.log('sessionName page was: '+req.session.sessionName);
   // }
@@ -113,22 +137,22 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    res.status(err.status || 500).send();
+    // res.render('error', {
+    //   message: err.message,
+    //   error: err
+    // });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  res.status(err.status || 500).send();
+  // res.render('error', {
+  //   message: err.message,
+  //   error: {}
+  // });
 });
 
 

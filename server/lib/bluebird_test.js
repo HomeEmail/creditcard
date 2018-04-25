@@ -1,5 +1,7 @@
-//var $bluebird = require('bluebird');
+
 var Promise = require('bluebird');//promise 库
+var fs = require('fs');
+var path = require('path');
 
 
 var asyncObj={
@@ -46,7 +48,6 @@ var asyncObj={
 		});
 	}
 };
-//$bluebird.promisifyAll(asyncObj);//处理
 
 asyncObj.fn1()
 .then(asyncObj.fn2)
@@ -56,3 +57,32 @@ asyncObj.fn1()
 });
 
 
+
+Promise.promisifyAll(fs);//处理
+
+fs.accessAsync(path.join(__dirname,'test.log'),fs.F_OK)
+.then(function(){
+	console.log('test.log文件存在');
+})
+.catch(function(err){
+	console.log('test.log文件不存在 catch:',err);
+})
+.then(function(){
+	return fs.accessAsync(path.join(__dirname,'common.js'),fs.F_OK);
+})
+.then(function(){
+	console.log('common.js文件存在');
+})
+.catch(function(err){
+	console.log('common.js文件不存在 catch:',err);
+});
+/*
+//不要Promise的原生方法如下
+//判断文件是否存在
+if(fs.access(path.join(__dirname,'test.log'),fs.F_OK,function(err){
+	console.log(err?'test.log文件不存在':'test.log文件存在');
+}));
+if(fs.access(path.join(__dirname,'common.js'),fs.F_OK,function(err){
+	console.log(err?'common.js文件不存在':'common.js文件存在');
+}));
+*/
