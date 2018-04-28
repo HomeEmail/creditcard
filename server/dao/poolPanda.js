@@ -1,6 +1,8 @@
 var $mysql = require('mysql2');  
 var $conf = require('../conf/dbPanda');
 
+
+
 var mysql_pool = $mysql.createPool(Object.assign({},$conf.mysql));  
 
 module.exports={

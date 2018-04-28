@@ -16,7 +16,7 @@ var asyncObj={
 				}else{
 					reject('error1');
 				}
-			},3000);
+			},1000);
 		});
 	},
 	fn2:function(){
@@ -53,29 +53,33 @@ asyncObj.fn1()
 .then(asyncObj.fn2)
 .then(asyncObj.fn3)
 .catch(function(err){
-	console.log(err);
-});
+	console.log('error1:',err);
+})
+.then(fs_test);
 
 
 
 Promise.promisifyAll(fs);//处理
 
-fs.accessAsync(path.join(__dirname,'test.log'),fs.F_OK)
-.then(function(){
-	console.log('test.log文件存在');
-})
-.catch(function(err){
-	console.log('test.log文件不存在 catch:',err);
-})
-.then(function(){
-	return fs.accessAsync(path.join(__dirname,'common.js'),fs.F_OK);
-})
-.then(function(){
-	console.log('common.js文件存在');
-})
-.catch(function(err){
-	console.log('common.js文件不存在 catch:',err);
-});
+function fs_test(){
+	fs.accessAsync(path.join(__dirname,'test.log'),fs.F_OK)
+	.then(function(){
+		console.log('test.log文件存在');
+	})
+	.catch(function(err){
+		console.log('test.log文件不存在 catch:',err);
+	})
+	.then(function(){
+		return fs.accessAsync(path.join(__dirname,'common.js'),fs.F_OK);
+	})
+	.then(function(){
+		console.log('common.js文件存在');
+	})
+	.catch(function(err){
+		console.log('common.js文件不存在 catch:',err);
+	});
+}
+
 /*
 //不要Promise的原生方法如下
 //判断文件是否存在
