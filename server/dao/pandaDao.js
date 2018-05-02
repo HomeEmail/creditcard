@@ -12,8 +12,8 @@ module.exports={
 		update:function(req,cb){
 			$pool.exec($sql.utvgo_supplier.update,[req.query.name,req.query.descript,req.query.id||0],cb);
 		},
-		queryAll : function(req,cb){
-			$pool.exec($sql.utvgo_supplier.queryAll,[],cb);
+		queryAll : function(req){
+			return $pool.exec($sql.utvgo_supplier.queryAll,[]);
 
 		}
 	},
@@ -24,8 +24,8 @@ module.exports={
 		update:function(req,cb){
 			$pool.exec($sql.utvgo_language.update,[req.query.name,req.query.descript,req.query.id||0],cb);
 		},
-		queryAll : function(req,cb){
-			$pool.exec($sql.utvgo_language.queryAll,[],cb);
+		queryAll : function(req){
+			return $pool.exec($sql.utvgo_language.queryAll,[]);
 
 		}
 	},
@@ -36,8 +36,8 @@ module.exports={
 		update:function(req,cb){
 			$pool.exec($sql.utvgo_area.update,[req.query.name,req.query.descript,req.query.id||0],cb);
 		},
-		queryAll : function(req,cb){
-			$pool.exec($sql.utvgo_area.queryAll,[],cb);
+		queryAll : function(req){
+			return $pool.exec($sql.utvgo_area.queryAll,[]);
 
 		}
 	},
@@ -48,8 +48,8 @@ module.exports={
 		update:function(req,cb){
 			$pool.exec($sql.utvgo_channel.update,[req.query.name,req.query.descript,req.query.id||0],cb);
 		},
-		queryAll : function(req,cb){
-			$pool.exec($sql.utvgo_channel.queryAll,[],cb);
+		queryAll : function(req){
+			return $pool.exec($sql.utvgo_channel.queryAll,[]);
 
 		}
 	},
@@ -60,8 +60,8 @@ module.exports={
 		update:function(req,cb){
 			$pool.exec($sql.utvgo_labels.update,[req.query.name,req.query.descript,req.query.id||0],cb);
 		},
-		queryAll : function(req,cb){
-			$pool.exec($sql.utvgo_labels.queryAll,[],cb);
+		queryAll : function(req){
+			return $pool.exec($sql.utvgo_labels.queryAll,[]);
 
 		}
 	}

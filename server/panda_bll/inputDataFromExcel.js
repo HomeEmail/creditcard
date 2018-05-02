@@ -8,7 +8,48 @@ var logger = log4js.getLogger(__filename);
 function getSupplier(req,cb){
 	var req={};
 	logger.info('inputDataFromExcel:','query supplier begin');
-	$panda.utvgo_supplier.queryAll(req,function(err,rows,feild){
+	console.log('333333333');
+	$panda.utvgo_supplier.queryAll(req)
+	.then(function(rows,feild){
+		if(rows&&rows.length>0){
+			logger.info('inputDataFromExcel:','query supplier ok');
+			console.log(JSON.stringify(rows));
+			return 0;
+		}
+		if(rows&&rows.length<=0){
+			console.log('no data');
+			return 0;
+		}
+	})
+	.catch(function(err){
+		console.log('utvgo_supplier error:',err);
+		logger.error('inputDataFromExcel:','query supplier error');
+	})
+	.then(function(){
+		return $panda.utvgo_language.queryAll(req);
+	})
+	.then(function(rows,feild){
+		console.log('utvgo_language----------');
+		if(rows&&rows.length>0){
+			//logger.info('inputDataFromExcel:','query supplier ok');
+			console.log(JSON.stringify(rows));
+			return 0;
+		}
+		if(rows&&rows.length<=0){
+			console.log('no data');
+			return 0;
+		}
+	})
+	.catch(function(err){
+		console.log('utvgo_language error:',err);
+		logger.error('inputDataFromExcel:','query language error');
+	})
+	.finally(function(){
+		console.log('final........33003......');
+		logger.info('inputDataFromExcel:','query supplier end');
+	});
+
+	/*$panda.utvgo_supplier.queryAll(req,function(err,rows,feild){
 		if(rows&&rows.length>0){
 			logger.info('inputDataFromExcel:','query supplier ok');
 			console.log(JSON.stringify(rows));
@@ -20,8 +61,9 @@ function getSupplier(req,cb){
 		}
 		logger.error('inputDataFromExcel:','query supplier error');
 		return 0;
-	});
-	logger.info('inputDataFromExcel:','query supplier end');
+	});*/
+
+	
 }
 getSupplier();
 
