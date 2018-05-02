@@ -65,13 +65,13 @@ function getSupplier(req,cb){
 
 	
 }
-getSupplier();
+//getSupplier();
 
 function addSupplier(req,cb){
 	var query={
 		name:'测试供应商'+(new Date().getTime()),
 		logo:'',
-		descript:'测试',
+		descript:'测试11',
 		createBy:'sys',
 		editeBy:'sys',
 		createTime:'2018-04-22 22:22:22',
@@ -80,15 +80,66 @@ function addSupplier(req,cb){
 	};
 	req=req||{};
 	req.query=query;
-	$panda.utvgo_supplier.insert(req,function(err,rows){
+	$panda.utvgo_supplier.insert(req)
+	.then(function(rows,feild){
+		if(rows&&rows.insertId){
+			console.log('insert supplier success:'+rows.insertId);
+			req.query.id=rows.insertId;
+			//console.log('insert feild:',feild);//undefined
+			return 0;
+		}
+	})
+	.catch(function(err){
+		console.log('supplier insert error:',err);
+	})
+	.then(function(){
+		req.query.descript='测试333333更新';
+		return $panda.utvgo_supplier.update(req);
+	})
+	.then(function(rows,feild){
+		console.log('update supplier success:',rows);
+		if(rows&&rows.serverStatus==2&&rows.affectedRows>0){
+	      //res.send(JSON.stringify(rows));
+	      console.log('update supplier affectedRows:'+rows.affectedRows);
+	      return;
+	    }
+	    if(rows.affectedRows<=0){
+	      console.log('no this record;update fail!');
+	      return;
+	    }
+		//console.log('update feild:',feild);//undefined
+	})
+	.catch(function(err){
+		console.log('supplier update error:',err);
+	})
+	.then(function(){
+		console.log('queryTotalNum supplier begin');
+		return $panda.utvgo_supplier.queryTotalNum();
+	})
+	.then(function(rows,feild){
+		console.log('queryTotalNum supplier success:',rows);
+		if(rows&&rows.length>0){
+			console.log('queryTotalNum supplier num:',rows[0].ROWS);
+		}
+		
+		//console.log('queryTotalNum feild:',feild);//undefined
+	})
+	.catch(function(err){
+		console.log('supplier queryTotalNum error:',err);
+	})
+	.finally(function(){
+		console.log('insert and update finally...');
+	});
+
+	/*$panda.utvgo_supplier.insert(req,function(err,rows){
 		if(rows&&rows.insertId){
 			console.log('insert success:'+rows.insertId);
 			return 0;
 		}
 		console.log('insert error');
-	});
+	});*/
 }
-//addSupplier();
+addSupplier();
 
 function getLanguage(req,cb){
 	var req={};
