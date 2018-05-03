@@ -18,6 +18,9 @@ module.exports={
 		},
 		queryTotalNum : function(req){
 			return $pool.exec($sql.utvgo_supplier.queryTotalNum,[]);
+		},
+		queryLimit : function(req){
+			return $pool.exec($sql.utvgo_supplier.queryLimit,[req.query.offsize,req.query.pageSize]);
 		}
 	},
 	utvgo_language:{

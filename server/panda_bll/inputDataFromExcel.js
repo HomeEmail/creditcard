@@ -127,6 +127,34 @@ function addSupplier(req,cb){
 	.catch(function(err){
 		console.log('supplier queryTotalNum error:',err);
 	})
+	.then(function(){
+		var pageNum=2;
+		var pageSize=3;
+		var offsize=pageSize*(pageNum-1);
+		
+		if(offsize<=0) offsize=0;
+
+		var req={
+			query:{
+				offsize:offsize,//记录偏移值
+				pageSize:pageSize,
+				pageNum:pageNum
+			}
+		};
+		return $panda.utvgo_supplier.queryLimit(req);
+	})
+	.then(function(rows,feild){
+		console.log('queryLimit begin...');
+		if(rows&&rows.length>0){
+			console.log('queryLimit result:',JSON.stringify(rows));
+		}
+		if(rows&&rows.length<=0){
+			console.log('queryLimit no record...');
+		}
+	})
+	.catch(function(err){
+		console.log('queryLimit error:',err);
+	})
 	.finally(function(){
 		console.log('insert and update finally...');
 	});

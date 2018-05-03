@@ -3,6 +3,7 @@ var panda={
 	utvgo_supplier : {
 		queryAll: 'select * from utvgo_supplier',
 		queryTotalNum:'select COUNT(1) ROWS FROM utvgo_supplier',
+		queryLimit:'select * FROM utvgo_supplier WHERE id>=(select id FROM utvgo_supplier ORDER BY id LIMIT ?,1) LIMIT ?',
 		insert:'INSERT INTO utvgo_supplier(id, name, logo,descript,createBy,editeBy,createTime,updateTime) VALUES(0,?,?,?,?,?,?,?)',
 		update:'update utvgo_supplier set name=?, descript=? where id=?'
 	},
