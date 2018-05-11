@@ -7,6 +7,8 @@ var $user = require('../dao/userDao');
 var log4js = require('../conf/log');//配置好的日记对象
 var logger=log4js.getLogger(__filename);//把当前代码文件路径也输出到日记中
 
+var wx_api= require('../lib/wx_api');
+
 var common=require('../lib/common');
 
 var execFile = require('child_process').execFile;
@@ -52,6 +54,11 @@ router.get('/', function(req, res, next) {
     msg:'OK'
   };
 
+  
+  var t=wx_api.setToken();
+  res.send(JSON.stringify(t));
+
+/*
   logger.info('index:','query mysql begin');
 
   $user.queryAll(req,function(err,rows,feild){
@@ -60,20 +67,20 @@ router.get('/', function(req, res, next) {
     if(rows&&rows.length>0){//rows是数组
       res.send(JSON.stringify(rows));
 
-	    /*//set cache
-	    cache.set('author','ivan',function(err,res){
-		    console.log('print:'+res);
-	    });
-	    cache.get('author',function(err,res){
-		    if(err){
-			    console.log('Error:'+err);
-			    return;
-		    }
-		    console.log('custom callback handle:'+res);
-	    });
+	    // //set cache
+	    // cache.set('author','ivan',function(err,res){
+		   //  console.log('print:'+res);
+	    // });
+	    // cache.get('author',function(err,res){
+		   //  if(err){
+			  //   console.log('Error:'+err);
+			  //   return;
+		   //  }
+		   //  console.log('custom callback handle:'+res);
+	    // });
 
-	    cache.expire('author',20);//设置键author 20秒后过期
-*/
+	    // cache.expire('author',20);//设置键author 20秒后过期
+      
 
       console.log('-----need many time handle this task-----');
 
@@ -108,7 +115,7 @@ router.get('/', function(req, res, next) {
     res.send(err);
 
   });
-
+*/
   //?username=xx&email=xx@qq.com
   /*$user.insert(req,function(err,rows){
     console.log(err);

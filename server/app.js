@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var indexHome = require('./routes/home');
 
 var captcha = require('./routes/captcha');
+var weixin = require('./routes/weixin');
 
 // var indexHome = require('./routes/index');
 // var login = require('./routes/login');
@@ -108,6 +109,7 @@ app.use(function (req, res, next) {
 
 app.use('/',indexHome);
 app.use('/captcha',captcha);
+app.use('/weixin',weixin);
 
 //app.use('/utvgo_wx/dest/index.html', indexHome);
 //app.use('/utvgo_wx/dest/login.html',login);

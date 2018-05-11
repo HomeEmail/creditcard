@@ -9,7 +9,8 @@ module.exports = {
         '/',
         '/login',
         '/captcha',
-        '/captcha/math'
+        '/captcha/math',
+        '/weixin/getToken'
     ]
 };
 
