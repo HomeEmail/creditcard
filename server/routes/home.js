@@ -55,10 +55,8 @@ router.get('/', function(req, res, next) {
   };
 
   
-  var t=wx_api.setToken();
-  res.send(JSON.stringify(t));
 
-/*
+
   logger.info('index:','query mysql begin');
 
   $user.queryAll(req,function(err,rows,feild){
@@ -115,7 +113,7 @@ router.get('/', function(req, res, next) {
     res.send(err);
 
   });
-*/
+
   //?username=xx&email=xx@qq.com
   /*$user.insert(req,function(err,rows){
     console.log(err);
