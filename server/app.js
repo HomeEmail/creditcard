@@ -57,7 +57,7 @@ app.use(session({
 app.use(function (req, res, next) {
   console.log('应用级Time:', Date.now());
   var url=req.url;
-  var token=req.get('token');
+  var token=req.get('token');//获取header参数 token
   //检查是否需要登陆验证
   var urlPath=url.split('?')[0];
   var isNeedLogin=true;

@@ -209,7 +209,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/logout',function(req,res,next){
-  var token=req.get('token');
+  var token=req.get('token');//获取header参数 token
   var data={};
   if(!token){
     data={
@@ -237,14 +237,14 @@ router.get('/logout',function(req,res,next){
 
 router.get('/test1',function(req,res,next){
   res.setHeader('Content-Type', 'application/json');
-  res.send({oo:1,dd:'ss',token:req.get('token')});
+  res.send({oo:1,dd:'ss',token:req.get('token')});//获取header参数 token
 });
 
 router.get('/test1/child',function(req,res,next){
   //console.log('req.headers:',req.headers);
   console.log('req.get(\'token\')',req.get('token'));
   res.setHeader('Content-Type', 'application/json');
-  res.send({test:'child',oo:1,dd:'ss',aa:null,bb:undefined,token:req.get('token')});
+  res.send({test:'child',oo:1,dd:'ss',aa:null,bb:undefined,token:req.get('token')});//获取header参数 token
 });
 
 
@@ -293,7 +293,7 @@ router.post('/login',function(req,res){
   res.send(data);
 });
 router.get('/login/check',function(req,res){
-  var token=req.get('token');
+  var token=req.get('token');//获取header参数 token
   console.log('/login/check','req.get',token);
   var data={
   };
