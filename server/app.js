@@ -32,7 +32,6 @@ app.set('view engine','html');
 /*app.use(logger('dev'));*/
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 //__dirname 当前代码执行的目录
 //path.resolve(__dirname, '..') 当前目录的上级目录
@@ -40,6 +39,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(path.resolve(__dirname, '..'), 'dest')));
 
+app.use(cookieParser());
 
 //session 配置
 console.log('config.js:',config);

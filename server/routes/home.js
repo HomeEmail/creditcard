@@ -80,7 +80,7 @@ router.get('/', function(req, res, next) {
 	    // cache.expire('author',20);//设置键author 20秒后过期
       
 
-      console.log('-----need many time handle this task-----');
+      /*console.log('-----need many time handle this task-----');
 
 	    console.log(__dirname);
 
@@ -99,7 +99,7 @@ router.get('/', function(req, res, next) {
 			   return;
 		   }
 		    console.log(':'+stdout);
-	    });
+	    });*/
 
       return;
     }
@@ -247,6 +247,17 @@ router.get('/test1/child',function(req,res,next){
   res.send({test:'child',oo:1,dd:'ss',aa:null,bb:undefined,token:req.get('token')});//获取header参数 token
 });
 
+router.get('/test',function(req,res,next){
+  req.session.testId='indextestid:'+new Date().getTime();
+  res.setHeader('Content-Type', 'application/json');
+  res.send({oo:1,dd:'ss',testId:req.session.testId});//
+});
+
+router.get('/test/sd',function(req,res,next){
+  //console.log('req.headers:',req.headers);
+  res.setHeader('Content-Type', 'application/json');
+  res.send({test:'child',oo:1,dd:'ss',aa:null,bb:undefined,testId:req.session.testId});//
+});
 
 /*
 router.get('/login',function(req,res){

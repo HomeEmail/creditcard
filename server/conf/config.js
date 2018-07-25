@@ -2,7 +2,7 @@
 module.exports = {
     session: {
         secret: 'fuckyou.oo' //session 密钥
-        ,maxAge: 120*1000 //失效时间 毫秒
+        ,maxAge: 60*60*1000 //失效时间 毫秒
         
     },
     notNeedLoginUrls:[ //不需要登陆的接口地址
@@ -10,7 +10,9 @@ module.exports = {
         '/login',
         '/captcha',
         '/captcha/math',
-        '/weixin/getToken'
+        '/weixin/getToken',
+        '/test',
+        '/test/sd'
     ]
 };
 
